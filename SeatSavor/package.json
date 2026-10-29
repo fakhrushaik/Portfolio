@@ -1,0 +1,1 @@
+{"dependencies":{"express":"^4.19.2"},"description":"SeatSavor — showcase-first 3D restaurant table-booking app: pastel isometric floor, clickable tables, light/dark and accessibility modes, with a small demo-only Express backend.","license":"MIT","main":"server.js","name":"seatsavor","scripts":{"dev":"node server.js","start":"node server.js"},"type":"commonjs","version":"1.0.0"}

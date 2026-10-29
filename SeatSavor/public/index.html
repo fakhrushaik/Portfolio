@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SeatSavor — 3D Restaurant Floor</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body data-theme="light">
+<header>
+  <div>
+    <h1>SeatSavor</h1>
+    <p>Pick your table in 3D — like booking a seat on a plane. Demo only, no payments.</p>
+  </div>
+  <div class="toolbar">
+    <button id="themeBtn" type="button" aria-pressed="false">🌙 Dark mode</button>
+    <button id="a11yBtn" type="button" aria-pressed="false">♿ Accessibility mode</button>
+    <button id="rotateBtn" type="button" aria-pressed="false">⟳ Auto-rotate</button>
+    <a class="btn" href="portfolio.html">Portfolio →</a>
+  </div>
+</header>
+
+<main class="layout">
+  <aside class="panel" aria-label="Restaurant controls">
+    <div class="open-row"><strong>Restaurant</strong><span><span class="badge" style="color:var(--green)">● OPEN</span> <button id="openBtn" class="switch" type="button" aria-label="Toggle open or closed"></button></span></div>
+    <p class="muted" style="margin-top:0">Owner view in the demo: Tables, Menus, Bookings, Settings.</p>
+    <p>
+      <button data-filter="all" class="filter active" type="button">All</button>
+      <button data-filter="free" class="filter" type="button">Free</button>
+      <button data-filter="occupied" class="filter" type="button">Occupied</button>
+    </p>
+    <h2>Pick a table</h2>
+    <p class="muted">Use Tab, then arrow keys to move between tables, Enter to select. Or click a table in 3D.</p>
+    <div id="tableList" class="table-list" role="listbox" aria-label="Tables"></div>
+    <p class="muted">Blue = free &nbsp;•&nbsp; Coral = occupied &nbsp;•&nbsp; Solid = selected</p>
+  </aside>
+
+  <section class="panel stage" aria-label="3D restaurant floor">
+    <div class="zoom-box">
+      <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
+      <label for="zoomSpeed">Zoom speed <span id="zoomSpeedVal">0.35</span></label>
+      <input id="zoomSpeed" type="range" min="0.1" max="1" step="0.05" value="0.35">
+      <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
+    </div>
+    <div class="view-controls">
+      <button type="button" data-view="poster" title="Wide poster view">Poster view</button>
+      <button type="button" data-view="top" title="Top-down view">Top down</button>
+      <button type="button" data-view="window" title="Window side view">Window side</button>
+      <button type="button" data-view="bar" title="Bar corner view">Bar corner</button>
+    </div>
+    <canvas id="scene" tabindex="0" aria-label="3D restaurant floor. Use arrow keys to cycle tables after selecting one."></canvas>
+    <div class="presets">
+      <button type="button" data-preset="poster">Poster</button>
+      <button type="button" data-preset="top">Top down</button>
+      <button type="button" data-preset="window">Window side</button>
+      <button type="button" data-preset="bar">Bar corner</button>
+    </div>
+    <button id="editBtn" class="edit-btn" type="button">✎ Edit Layout</button>
+  </section>
+
+  <aside class="panel detail-card" aria-label="Selected table details">
+    <div id="detail" aria-live="polite">
+      <p class="big">Pick a table</p>
+      <p class="muted">Click a table in the 3D room, or choose one from the list on the left.</p>
+    </div>
+    <div id="footprint" class="footprint" aria-hidden="true"></div>
+    <form id="bookingForm">
+      <h2 style="margin-bottom:2px">Demo booking (in-memory only)</h2>
+      <label>Date <input id="bkDate" type="date" required></label>
+      <label>Time <input id="bkTime" type="time" required></label>
+      <label>Party size <input id="bkParty" type="number" min="1" max="12" value="2" required></label>
+      <label>Name (optional, demo only) <input id="bkName" type="text" placeholder="Demo guest"></label>
+      <button class="primary" type="submit">Book selected table</button>
+      <p id="bookingMsg" class="toast" aria-live="polite"></p>
+      <button id="resetBookings" type="button">Clear demo bookings</button>
+    </form>
+  </aside>
+</main>
+
+<footer>
+  <p>Demo only — no tracking, no advertising cookies, no payments, no accounts. Bookings live in server memory and vanish on restart. See <a href="../PRIVACY.md">PRIVACY.md</a> in the project (linked in the README too).</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

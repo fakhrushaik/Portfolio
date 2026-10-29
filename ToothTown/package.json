@@ -1,0 +1,1 @@
+{"dependencies":{"express":"^4.19.2"},"description":"ToothTown v2 — professional small dentistry clinic operations demo: 2D floor plan, schedule, approvals, and a Node API. Fictional demo data only.","engines":{"node":">=18"},"main":"server/server.js","name":"toothtown-v2","scripts":{"dev":"node server/server.js","start":"node server/server.js"},"version":"2.0.0"}

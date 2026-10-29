@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fakhruddin — Portfolio</title>
+<meta name="description" content="Portfolio of Fakhruddin, IT student at the University of Cincinnati. Front-end and interactive 3D projects: SeatSavor, ToothTown, and Smart-AI-Planner.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#projects">Skip to projects</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">Fakhruddin</a>
+    <nav aria-label="Main">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Portfolio</p>
+    <h1>Hi, I'm Fakhruddin.</h1>
+    <p class="lead">IT student at the University of Cincinnati, graduating in May 2027. I build front-end and interactive 3D interfaces that are meant to be used, not just looked at.</p>
+    <p class="hero-links">
+      <a class="button" href="#projects">See my projects</a>
+      <a class="button secondary" href="https://github.com/fakhrushaik">GitHub</a>
+    </p>
+    <p class="note">Currently focused on: SeatSavor, ToothTown, and the Smart-AI-Planner capstone front end.</p>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-heading">
+    <h2 id="projects-heading">Featured projects</h2>
+    <p class="section-intro">Each card links to a live demo where one exists, and to its code or project page. Demo data is fictional.</p>
+
+    <div class="project-grid">
+      <article class="card">
+        <div class="card-visual seatsavor-visual" aria-hidden="true"><span>SeatSavor</span></div>
+        <h3>SeatSavor</h3>
+        <p class="card-tag">3D restaurant table booking &middot; Showcase-first</p>
+        <p>Pick your exact table in 3D, like booking a seat on a plane. A pastel isometric room with 12 clickable tables, detail cards, camera presets, gentle zoom, light/dark mode, and an accessibility mode.</p>
+        <ul class="tags">
+          <li>JavaScript</li><li>Three.js</li><li>Node.js</li><li>Express</li>
+        </ul>
+        <p class="card-links">
+          <a href="SeatSavor/">Live demo</a>
+          <a href="SeatSavor/about.html">About this project</a>
+        </p>
+        <p class="small">On Pages, 3D picking, camera presets, and table details work. Demo bookings need the local server, run <code>npm start</code> in <code>SeatSavor/</code>, so the booking form will say the backend is not reachable on Pages.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-visual toothtown-visual" aria-hidden="true"><span>ToothTown</span></div>
+        <h3>ToothTown</h3>
+        <p class="card-tag">3D dentistry clinic booking &middot; In progress</p>
+        <p>A SeatSavor-style clinic app built from a hand-drawn floor plan: clinic rooms, staff, patient scheduling, a calendar, available slots, and bookings that stay pending until a doctor approves or rejects them.</p>
+        <ul class="tags">
+          <li>JavaScript</li><li>3D floor plan</li><li>Booking workflow</li><li>Database</li>
+        </ul>
+        <p class="card-links">
+          <a href="ToothTown/">Live demo</a>
+          <a href="ToothTown/about.html">About this project</a>
+        </p>
+        <p class="small">On Pages, ToothTown runs in browser-only mode with fictional demo data saved in your own browser. The full backend and database are in <code>ToothTown/server/</code> for local use.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-visual planner-visual" aria-hidden="true"><span>Smart-AI-Planner</span></div>
+        <h3>Smart-AI-Planner</h3>
+        <p class="card-tag">University capstone &middot; Team project &middot; Front end</p>
+        <p>University of Cincinnati Senior Design capstone. I lead the front end: Apple-style clarity, Dark Mode that actually reads, Supabase email sign-in, and calendar (.ics) import/export. Apple and Google sign-in are marked as coming soon.</p>
+        <ul class="tags">
+          <li>Front end</li><li>Supabase</li><li>.ics</li><li>GitHub Pages</li>
+        </ul>
+        <p class="card-links">
+          <a href="https://fakhrushaik.github.io/Smart-AI-Planner/index.html">Live site</a>
+          <a href="https://github.com/fakhrushaik/Smart-AI-Planner">Code on GitHub</a>
+          <a href="smart-ai-planner.html">My role</a>
+        </p>
+        <p class="small">This is a team project. This portfolio links to it rather than copying the whole repo, and highlights my front-end contribution.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Skills</h2>
+    <ul class="skills-list">
+      <li>HTML and CSS</li>
+      <li>JavaScript</li>
+      <li>Three.js</li>
+      <li>Node.js and Express</li>
+      <li>Git and GitHub</li>
+      <li>GitHub Pages</li>
+      <li>Supabase email auth (front end)</li>
+      <li>Responsive and accessible design</li>
+    </ul>
+    <p class="small">Add or remove skills here only if you have actually used them in a project above. Recruiters check.</p>
+  </section>
+
+  <section id="about" aria-labelledby="about-heading">
+    <h2 id="about-heading">About</h2>
+    <p>I'm finishing my IT degree first, graduating in May 2027, and building a portfolio around projects I can actually demo. I like taking a rough idea, a Threads demo, a hand-drawn clinic sketch, a capstone brief, and turning it into something you can click through.</p>
+    <p>What I care about in a build: it works on a phone, the text is readable in dark mode, keyboard users can get around, and the demo doesn't pretend to be a real service. SeatSavor and ToothTown use fictional demo data only, with no payments and no real reservations.</p>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Contact</h2>
+    <p>Best place to start is GitHub, where the projects and their READMEs live.</p>
+    <ul>
+      <li><a href="https://github.com/fakhrushaik">github.com/fakhrushaik</a></li>
+      <li><a href="https://github.com/fakhrushaik/Smart-AI-Planner">Smart-AI-Planner on GitHub</a></li>
+    </ul>
+    <p class="small">Add LinkedIn or an email here only if you want them public on a portfolio site.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built as a static site for GitHub Pages. No tracking, no accounts, no payments on this page.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

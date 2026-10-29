@@ -1,0 +1,123 @@
+/* Portfolio starter: calm, neutral, mobile-first. Let the project demos bring the colour. */
+:root {
+  --bg: #f8f7f4;
+  --surface: #ffffff;
+  --text: #1c2430;
+  --muted: #5b6572;
+  --line: #dde2e8;
+  --accent: #0f766e;
+  --accent-soft: #e0f2f1;
+  --radius: 14px;
+}
+
+[data-theme="dark"] {
+  --bg: #111827;
+  --surface: #1f2937;
+  --text: #f3f4f6;
+  --muted: #cbd5e1;
+  --line: #374151;
+  --accent: #5eead4;
+  --accent-soft: #134e4a;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.wrap { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--surface); padding: 8px 12px; z-index: 10;
+}
+.skip-link:focus { left: 12px; top: 12px; }
+
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  position: sticky; top: 0;
+}
+.header-inner {
+  display: flex; align-items: center; gap: 20px;
+  padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap;
+}
+.brand { font-weight: 800; font-size: 1.15rem; color: var(--text); text-decoration: none; }
+.site-header nav { display: flex; gap: 16px; margin-left: auto; flex-wrap: wrap; }
+.site-header nav a { color: var(--text); text-decoration: none; }
+.site-header nav a:hover { text-decoration: underline; }
+#theme-toggle {
+  background: var(--accent-soft); color: var(--text);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 7px 14px; cursor: pointer; font: inherit;
+}
+
+.hero { padding: 56px 0 28px; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; color: var(--muted); margin: 0 0 8px; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; margin: 0 0 14px; }
+h2 { font-size: 1.7rem; margin: 48px 0 10px; }
+h3 { margin: 14px 0 4px; }
+.lead { font-size: 1.2rem; max-width: 720px; }
+.hero-links { display: flex; gap: 12px; flex-wrap: wrap; margin: 22px 0 10px; }
+.button {
+  display: inline-block; background: var(--accent); color: #fff;
+  text-decoration: none; padding: 10px 18px; border-radius: 999px; font-weight: 650;
+}
+[data-theme="dark"] .button { color: #062f2b; }
+.button.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+.note, .small, .section-intro { color: var(--muted); }
+.small { font-size: 0.92rem; }
+
+.project-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px; margin-top: 18px;
+}
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 18px;
+}
+.card-visual {
+  height: 130px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.25rem; color: #1c2430;
+}
+.seatsavor-visual { background: linear-gradient(135deg, #fde68a, #bae6fd, #fecdd3); }
+.toothtown-visual { background: linear-gradient(135deg, #99f6e4, #e2e8f0, #a5f3fc); }
+.planner-visual { background: linear-gradient(135deg, #ddd6fe, #e2e8f0, #fef3c7); }
+.card-tag { color: var(--muted); font-size: 0.92rem; margin: 0; }
+.tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tags li {
+  background: var(--accent-soft); border-radius: 999px;
+  padding: 3px 10px; font-size: 0.88rem;
+}
+.card-links { display: flex; gap: 16px; flex-wrap: wrap; font-weight: 650; }
+.card-links a { text-decoration: none; }
+.card-links a:hover { text-decoration: underline; }
+code { background: var(--accent-soft); padding: 1px 6px; border-radius: 6px; font-size: 0.92em; }
+
+.skills-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.skills-list li {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 999px; padding: 7px 14px;
+}
+
+.site-footer { border-top: 1px solid var(--line); margin-top: 56px; padding: 22px 0 36px; }
+
+@media (max-width: 640px) {
+  .site-header nav { margin-left: 0; }
+  .hero { padding-top: 36px; }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ToothTown — Dental Clinic Operations</title>
+<link rel="stylesheet" href="styles.css">
+<meta name="description" content="ToothTown: a professional, fictional demo for small dentistry clinic scheduling and operatory operations. No real patient data.">
+</head>
+<body>
+<header class="topbar">
+  <button class="btn secondary small menu-btn" id="menuBtn" aria-label="Toggle navigation menu">Menu</button>
+  <div class="brand">ToothTown <small>Dental clinic operations · Demo</small></div>
+  <div class="meta">
+    <label>Date <input type="date" id="topDate" aria-label="Selected date"></label>
+    <span class="clock" id="clock" aria-label="Integrated clock">--:--</span>
+    <label>Role
+      <select id="roleSel" aria-label="Role switcher">
+        <option value="receptionist">Receptionist · Anna</option>
+        <option value="doctor">Dr John</option>
+        <option value="doctor-mary">Dr Mary</option>
+        <option value="it_admin">IT Admin · Shaik</option>
+      </select>
+    </label>
+    <label>Search <input type="search" id="searchInput" placeholder="Search patients, rooms…" aria-label="Search"></label>
+    <button class="btn secondary small" id="themeBtn" aria-label="Toggle light and dark theme">Dark mode</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+    <button class="nav active" data-view="today">Today</button>
+    <button class="nav" data-view="schedule">Schedule</button>
+    <button class="nav" data-view="operatories">Operatories</button>
+    <button class="nav" data-view="patients">Patients</button>
+    <button class="nav" data-view="staff">Staff</button>
+    <button class="nav" data-view="approvals">Approvals</button>
+    <button class="nav" data-view="settings">Settings</button>
+    <p class="hint">Fictional demo data only. No real patient data, no payments, no accounts. Approval is a demo workflow, not a clinical system.</p>
+  </nav>
+
+  <main>
+    <div id="banner" role="status"></div>
+
+    <!-- TODAY -->
+    <section id="view-today">
+      <h1>Today at a glance</h1>
+      <p class="sub">Operatories, approvals, and the next patients up — in one calm view for the front desk and the doctors.</p>
+      <div class="grid kpis" id="kpis"></div>
+
+      <h2>Floor plan — 2D top-down</h2>
+      <div class="card">
+        <p class="sub">Walls are continuous lines. A door is a gap in that wall, with a leaf and swing arc anchored in the gap. Rooms in use are dark slate; available rooms stay light, in both themes. Washrooms are closed labelled rooms only.</p>
+        <div class="plan-legend">
+          <span><i style="background:#1F2A33"></i> In use</span>
+          <span><i style="background:#fff"></i> Available</span>
+          <span><i style="background:#0F766E"></i> Door leaf (in wall gap)</span>
+          <span>Click or tap a room, or use Tab and Enter, to see its detail.</span>
+        </div>
+        <div class="plan-wrap"><div id="floorplan" role="region" aria-label="Clinic floor plan"></div></div>
+        <div id="roomDetail" class="room-detail" aria-live="polite">Select a room to see its detail, interior note, and today's bookings.</div>
+        <label style="display:block;margin-top:14px">Background theme
+          <select id="bgTheme" aria-label="Background theme">
+            <option>Morning</option><option>Sunrise</option><option>Sunset</option><option>Rain</option><option>Snow</option><option>Night</option>
+          </select>
+        </label>
+        <p class="sub" id="bgNote">Background theme changes the plan backdrop only. It does not change the clinic palette or room availability colours.</p>
+      </div>
+
+      <div class="grid two">
+        <div>
+          <h2>Per-operatory timeline</h2>
+          <div class="grid timeline" id="timeline"></div>
+          <h2>Next up</h2>
+          <div class="card" id="nextUp"></div>
+        </div>
+        <div>
+          <h2>Pending approvals</h2>
+          <div class="card" id="pendingQueue"></div>
+          <h2>Walk-in</h2>
+          <div class="card">
+            <p>Add a walk-in for today. It goes to pending approval, like any new booking.</p>
+            <button class="btn" id="walkinBtn">Add walk-in to next free slot</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section id="view-schedule" hidden>
+      <h1>Schedule</h1>
+      <p class="sub">Day and week views, filtered by doctor and operatory. A doctor or room cannot be double-booked at the same time.</p>
+      <div class="card">
+        <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="field"><label>View</label><select id="calView"><option value="day">Day</option><option value="week">Week (7 days)</option></select></div>
+          <div class="field"><label>Doctor</label><select id="filterDoctor"><option value="">All doctors</option></select></div>
+          <div class="field"><label>Operatory</label><select id="filterRoom"><option value="">All operatories</option></select></div>
+          <div class="field"><label>Date</label><input type="date" id="calDate"></div>
+        </div>
+        <div id="calendarGrid"></div>
+      </div>
+
+      <h2>Book an appointment — 4 steps</h2>
+      <div class="card">
+        <div class="stepbar" id="stepbar"><span class="on">1 Patient</span><span>2 Service</span><span>3 Doctor / Operatory</span><span>4 Date &amp; time</span></div>
+        <div id="bookStep"></div>
+      </div>
+    </section>
+
+    <!-- OPERATORIES -->
+    <section id="view-operatories" hidden>
+      <h1>Operatories</h1>
+      <p class="sub">Status, today's bookings, and interior notes. Interior notes are text in the detail panel only — they are not drawn as furniture on the plan.</p>
+      <div class="grid" id="opList"></div>
+    </section>
+
+    <!-- PATIENTS -->
+    <section id="view-patients" hidden>
+      <h1>Patients</h1>
+      <p class="sub">Demo patients only. No figures, no health records — rows and cards only.</p>
+      <div class="card">
+        <div class="field"><label>Search patients</label><input type="search" id="patientSearch" placeholder="Type a name…"></div>
+        <div id="patientTable"></div>
+        <h3>Add a demo patient</h3>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="field"><label>Name</label><input id="newPatName" placeholder="Full name"></div>
+          <div class="field"><label>Phone</label><input id="newPatPhone" placeholder="555-0000"></div>
+          <div class="field"><label>Preference</label><input id="newPatPref" placeholder="Morning, kids room…"></div>
+        </div>
+        <button class="btn" id="addPatientBtn">Add patient</button>
+      </div>
+    </section>
+
+    <!-- STAFF -->
+    <section id="view-staff" hidden>
+      <h1>Staff</h1>
+      <p class="sub">Doctors, receptionist, and IT Admin. IT Admin has full access in this demo.</p>
+      <div class="card" id="staffTable"></div>
+    </section>
+
+    <!-- APPROVALS -->
+    <section id="view-approvals" hidden>
+      <h1>Approvals</h1>
+      <p class="sub">New bookings wait here until a doctor approves or rejects them. Rejections need a reason.</p>
+      <div class="card" id="approvalList"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="view-settings" hidden>
+      <h1>Settings</h1>
+      <div class="card">
+        <h2>Accessibility</h2>
+        <label><input type="checkbox" id="accLarge"> Large text</label><br>
+        <label><input type="checkbox" id="accContrast"> High contrast</label><br>
+        <label><input type="checkbox" id="accMotion"> Reduce motion</label>
+        <p class="sub">Keyboard: Tab through the sidebar, floor-plan rooms, and booking steps; Enter selects a room or a slot. All buttons are large touch targets with visible focus.</p>
+        <h2>Privacy statement</h2>
+        <p>ToothTown v2 is a demonstration. All patients, bookings, and staff names are fictional demo data. Nothing here is real patient health information, nothing is sold or shared, and on GitHub Pages your demo changes are stored only in your own browser (localStorage). There are no accounts, payments, or real clinical records, and this app makes no certification claim.</p>
+        <h2>Why I made this website</h2>
+        <p>This project explores how a small dentistry clinic could run its day clearly: one plan, one schedule, and one approval queue, instead of scattered notes. The goal is a calm tool the front desk can actually use — easy to read at a glance, hard to double-book, and clear about what still needs a doctor's decision.</p>
+        <h2>Data</h2>
+        <p><button class="btn secondary" id="resetBtn">Reset demo data</button> Restores the 19 numbered items, 4 staff, 6 demo patients, and 3 demo appointments.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>ToothTown v2 · Fictional demo data only</span>
+      <a href="#view-settings" data-footer-settings>Accessibility</a>
+      <a href="#view-settings" data-footer-settings>Privacy statement</a>
+      <a href="#view-settings" data-footer-settings>Why I made this website</a>
+    </footer>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
