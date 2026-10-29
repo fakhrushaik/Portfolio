@@ -3,18 +3,18 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 const FALLBACK_TABLES = [
-  { id: "T1", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "free", zone: "Window", note: "Quiet window spot for two, good morning light.", x: -5.5, z: -3.5 },
-  { id: "T2", seats: 4, shape: "Rectangle", dimensions: "1.20 m × 0.80 m", status: "free", zone: "Window", note: "Window row, easy to watch the street.", x: -2.5, z: -3.5 },
-  { id: "T3", seats: 6, shape: "Rectangle", dimensions: "2.00 m × 1.00 m", status: "occupied", zone: "Window", note: "Large window table, currently in use.", x: 0.5, z: -3.5 },
-  { id: "T4", seats: 4, shape: "Square", dimensions: "1.00 m × 1.00 m", status: "free", zone: "Centre", note: "Central, easy to reach from the entrance.", x: 3.5, z: -3.5 },
-  { id: "T5", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "occupied", zone: "Centre", note: "Cosy centre table for two.", x: 6.0, z: -3.0 },
-  { id: "T6", seats: 4, shape: "Rectangle", dimensions: "1.40 m × 0.85 m", status: "free", zone: "Centre", note: "Near the plants, a little quieter.", x: -5.5, z: 0.0 },
-  { id: "T7", seats: 4, shape: "Rectangle", dimensions: "1.40 m × 0.85 m", status: "free", zone: "Centre", note: "Open centre table, good for groups of four.", x: -2.0, z: 0.0 },
-  { id: "T8", seats: 8, shape: "Rectangle", dimensions: "2.40 m × 1.00 m", status: "free", zone: "Centre", note: "Long table for celebrations and big groups.", x: 2.0, z: 0.0 },
-  { id: "T9", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "occupied", zone: "Bar", note: "Close to the bar, lively in the evening.", x: 6.0, z: 0.5 },
-  { id: "T10", seats: 4, shape: "Square", dimensions: "1.00 m × 1.00 m", status: "free", zone: "Garden", note: "Near the garden side, plants all around.", x: -5.5, z: 3.5 },
-  { id: "T11", seats: 6, shape: "Rectangle", dimensions: "2.00 m × 1.00 m", status: "occupied", zone: "Garden", note: "Garden-side table for six, currently in use.", x: -1.5, z: 3.5 },
-  { id: "T12", seats: 4, shape: "Rectangle", dimensions: "1.20 m × 0.80 m", status: "free", zone: "Bar", note: "Bar corner, easy to order and chat.", x: 3.5, z: 3.5 },
+  { id: "T1", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "free", zone: "Window", note: "Quiet window spot for two, good morning light.", x: -9, z: -5.5 },
+  { id: "T2", seats: 4, shape: "Rectangle", dimensions: "1.20 m × 0.80 m", status: "free", zone: "Window", note: "Window row, easy to watch the street.", x: -3, z: -5.5 },
+  { id: "T3", seats: 6, shape: "Rectangle", dimensions: "2.00 m × 1.00 m", status: "occupied", zone: "Window", note: "Large window table, currently in use.", x: 3, z: -5.5 },
+  { id: "T4", seats: 4, shape: "Square", dimensions: "1.00 m × 1.00 m", status: "free", zone: "Centre", note: "Central, easy to reach from the entrance.", x: 3, z: 5.5 },
+  { id: "T5", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "occupied", zone: "Centre", note: "Cosy centre table for two.", x: 9, z: -5.5 },
+  { id: "T6", seats: 4, shape: "Rectangle", dimensions: "1.40 m × 0.85 m", status: "free", zone: "Centre", note: "Near the plants, a little quieter.", x: -9, z: 0 },
+  { id: "T7", seats: 4, shape: "Rectangle", dimensions: "1.40 m × 0.85 m", status: "free", zone: "Centre", note: "Open centre table, good for groups of four.", x: -3, z: 0 },
+  { id: "T8", seats: 8, shape: "Rectangle", dimensions: "2.40 m × 1.00 m", status: "free", zone: "Centre", note: "Long table for celebrations and big groups.", x: 3, z: 0 },
+  { id: "T9", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "occupied", zone: "Bar", note: "Close to the bar, lively in the evening.", x: 9, z: 0 },
+  { id: "T10", seats: 4, shape: "Square", dimensions: "1.00 m × 1.00 m", status: "free", zone: "Garden", note: "Near the garden side, plants all around.", x: -9, z: 5.5 },
+  { id: "T11", seats: 6, shape: "Rectangle", dimensions: "2.00 m × 1.00 m", status: "occupied", zone: "Garden", note: "Garden-side table for six, currently in use.", x: -3, z: 5.5 },
+  { id: "T12", seats: 4, shape: "Rectangle", dimensions: "1.20 m × 0.80 m", status: "free", zone: "Bar", note: "Bar corner, easy to order and chat.", x: 9, z: 5.5 },
 ];
 
 let tables = FALLBACK_TABLES;
@@ -38,7 +38,7 @@ controls.dampingFactor = 0.08;
 controls.rotateSpeed = 0.6;
 controls.panSpeed = 0.6;
 controls.minDistance = 6;
-controls.maxDistance = 32;
+controls.maxDistance = 45;
 controls.zoomSpeed = 0.35;
 
 const reducedMotion = () =>
@@ -56,13 +56,13 @@ function box(w, h, d, color, x, y, z) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(color));
   m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; scene.add(m); return m;
 }
-const floor = new THREE.Mesh(new THREE.PlaneGeometry(17, 11), mat(0xf3ead9));
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(26, 18), mat(0xf3ead9));
 floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
-box(17, 0.2, 0.3, 0xffffff, 0, 0.1, -5.6);
-box(0.3, 0.2, 11, 0xffffff, -8.6, 0.1, 0);
-box(4.5, 1.0, 0.7, 0xb08968, 6.2, 0.5, 5.2);
-for (let i = 0; i < 3; i++) box(0.45, 0.65, 0.45, 0x8a6d4b, 4.8 + i * 1.4, 0.32, 4.4);
-[[-7.8, -4.8], [7.8, -4.8], [-7.8, 4.8]].forEach(([x, z]) => {
+box(26, 0.2, 0.3, 0xffffff, 0, 0.1, -9.1);
+box(0.3, 0.2, 18, 0xffffff, -13.1, 0.1, 0);
+box(5.0, 1.0, 0.7, 0xb08968, 9.0, 0.5, 8.6);
+for (let i = 0; i < 3; i++) box(0.45, 0.65, 0.45, 0x8a6d4b, 7.6 + i * 1.4, 0.32, 7.8);
+[[-12.2, -8.2], [12.2, -8.2], [-12.2, 8.2]].forEach(([x, z]) => {
   const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.28, 0.5, 12), mat(0xc97b5a));
   pot.position.set(x, 0.25, z); pot.castShadow = true; scene.add(pot);
   const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.55, 12, 10), mat(0x7fb069));
@@ -70,7 +70,7 @@ for (let i = 0; i < 3; i++) box(0.45, 0.65, 0.45, 0x8a6d4b, 4.8 + i * 1.4, 0.32,
 });
 for (let i = 0; i < 4; i++) {
   const lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.5, 0.4, 16), mat(0xf2c14e));
-  lamp.position.set(-5 + i * 3.3, 3.2, 0); scene.add(lamp);
+  lamp.position.set(-9 + i * 6, 3.2, 0); scene.add(lamp);
 }
 
 function labelSprite(text) {
@@ -118,10 +118,10 @@ function flyTo(pos, target) {
   camAnim = { fromPos: camera.position.clone(), toPos: new THREE.Vector3(...pos), fromT: controls.target.clone(), toT: new THREE.Vector3(...target), start: performance.now(), dur: 900 };
 }
 const PRESETS = {
-  poster: [[11, 11, 11], [0, 0, 0]],
-  top: [[0, 20, 0.01], [0, 0, 0]],
-  window: [[-6, 7, -9], [-1, 0, -2]],
-  bar: [[9, 6, 9], [3, 0, 3]],
+  poster: [[15, 15, 15], [0, 0, 0]],
+  top: [[0, 28, 0.01], [0, 0, 0]],
+  window: [[-9, 9, -13], [-2, 0, -3]],
+  bar: [[13, 8, 13], [5, 0, 5]],
 };
 function applyPreset(name) { const p = PRESETS[name]; if (p) flyTo(p[0], p[1]); }
 document.querySelectorAll("[data-preset],[data-view]").forEach((b) =>

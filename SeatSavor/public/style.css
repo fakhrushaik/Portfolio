@@ -1,67 +1,179 @@
-/* SeatSavor — pastel, calm, readable. Light/dark + accessibility via variables. */
+/* SeatSavor — Liquid Glass UI, following Apple Human Interface Guidelines.
+   Principles used: system fonts and sizes, large rounded shapes, translucent
+   material that lets the 3D floor show through, a clear hierarchy, generous
+   spacing, and a solid, high-contrast fallback in Accessibility mode.
+   Light and dark both use the same glass material, with different tints. */
 :root {
-  --bg: #f6f1e8; --panel: #ffffff; --text: #22252b; --muted: #5b6070;
-  --line: #e5ddd0; --blue: #2f7de1; --coral: #f26d6d; --green: #2e9e6b;
-  --shadow: 0 10px 30px rgba(40, 40, 60, .12); --radius: 16px; --font: 16px;
+  --bg: #eef1f5;
+  --bg-gradient: linear-gradient(180deg, #f7f3ec 0%, #e8eef5 55%, #dfe9f2 100%);
+  --panel: rgba(255, 255, 255, 0.62);
+  --panel-strong: rgba(255, 255, 255, 0.78);
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --line: rgba(255, 255, 255, 0.65);
+  --blue: #0071e3;
+  --blue-soft: rgba(0, 113, 227, 0.12);
+  --coral: #ff3b30;
+  --green: #248a3d;
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-small: 0 8px 24px rgba(0, 0, 0, 0.10);
+  --radius: 24px;
+  --radius-small: 16px;
+  --font: 17px;
+  --glass-blur: blur(24px) saturate(180%);
 }
 body[data-theme="dark"] {
-  --bg: #171a21; --panel: #232834; --text: #f2f3f5; --muted: #b8becd;
-  --line: #343b4a; --blue: #6aa8ff; --coral: #ff8a8a; --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+  --bg: #0e0e12;
+  --bg-gradient: linear-gradient(180deg, #1c1c22 0%, #121218 55%, #0a0a0e 100%);
+  --panel: rgba(38, 38, 44, 0.58);
+  --panel-strong: rgba(48, 48, 56, 0.72);
+  --text: #f5f5f7;
+  --muted: #aeaeb2;
+  --line: rgba(255, 255, 255, 0.14);
+  --blue: #0a84ff;
+  --blue-soft: rgba(10, 132, 255, 0.18);
+  --coral: #ff6961;
+  --green: #30d158;
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.30);
+  --shadow-small: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
-/* Accessibility mode: larger text, high contrast, stronger focus. */
-body.a11y { --font: 19px; }
-body.a11y { --text: #000; --muted: #222; }
-body[data-theme="dark"].a11y { --text: #fff; --muted: #e8e8e8; }
+/* Accessibility mode: glass off, solid panels, larger text, high contrast.
+   This is deliberate. Translucency must never cost readability. */
+body.a11y {
+  --font: 19px;
+  --panel: #ffffff;
+  --panel-strong: #ffffff;
+  --text: #000000;
+  --muted: #222222;
+  --glass-blur: none;
+}
+body[data-theme="dark"].a11y {
+  --panel: #1c1c1e;
+  --panel-strong: #1c1c1e;
+  --text: #ffffff;
+  --muted: #e8e8e8;
+}
 * { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; font-size: var(--font); background: var(--bg); color: var(--text); }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: var(--font);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
 button, input, select { font: inherit; }
-:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
 a { color: var(--blue); }
-header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 14px 18px; }
-header h1 { font-size: 1.35rem; margin: 0; }
-header p { margin: 2px 0 0; color: var(--muted); }
+
+/* Floating glass header, not a solid bar across the top. */
+header {
+  display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;
+  margin: 16px; padding: 16px 20px;
+  background: var(--panel);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-small), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+header h1 { font-size: 1.55rem; line-height: 1.1; letter-spacing: -0.03em; margin: 0; }
+header p { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
 .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-button, .btn { border: 1px solid var(--line); background: var(--panel); color: var(--text); padding: 8px 12px; border-radius: 999px; cursor: pointer; }
-button.active, button[aria-pressed="true"] { background: var(--blue); color: #fff; border-color: var(--blue); }
-.layout { display: grid; grid-template-columns: 280px 1fr 320px; gap: 14px; padding: 0 14px 14px; min-height: 70vh; }
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px; }
-.panel h2 { margin: 0 0 10px; font-size: 1.05rem; }
+
+button, .btn {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: var(--shadow-small), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+button:hover, .btn:hover { transform: translateY(-1px); }
+button:active, .btn:active { transform: translateY(0); }
+button.active, button[aria-pressed="true"] { background: var(--blue); color: #fff; border-color: transparent; }
+.btn { text-decoration: none; display: inline-block; }
+
+/* Three-column layout with breathing room. Side panels are glass cards. */
+.layout { display: grid; grid-template-columns: 300px 1fr 340px; gap: 16px; padding: 0 16px 16px; min-height: 70vh; }
+.panel {
+  background: var(--panel);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  padding: 20px;
+}
+.panel h2 { margin: 0 0 12px; font-size: 1.1rem; letter-spacing: -0.02em; }
 .muted { color: var(--muted); }
-.open-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
-.switch { position: relative; width: 52px; height: 28px; border-radius: 999px; background: var(--green); border: 0; }
-.switch::after { content: ""; position: absolute; right: 3px; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; }
-.table-list { display: grid; gap: 6px; }
-.table-list button { display: flex; justify-content: space-between; border-radius: 10px; text-align: left; }
-.table-list button.selected { outline: 3px solid var(--blue); }
-.badge { font-weight: 700; }
+.open-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.switch { position: relative; width: 56px; height: 32px; border-radius: 999px; background: var(--green); border: 0; padding: 0; box-shadow: none; }
+.switch::after { content: ""; position: absolute; right: 3px; top: 3px; width: 26px; height: 26px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+.table-list { display: grid; gap: 8px; }
+.table-list button { display: flex; justify-content: space-between; align-items: center; border-radius: 14px; text-align: left; background: var(--panel-strong); }
+.table-list button.selected { outline: 3px solid var(--blue); outline-offset: 0; background: var(--blue-soft); }
+.badge { font-weight: 700; white-space: nowrap; }
 .badge.free { color: var(--blue); } .badge.occupied { color: var(--coral); }
-.stage { position: relative; overflow: hidden; padding: 0; min-height: 520px; }
-#scene { width: 100%; height: 100%; min-height: 520px; display: block; background: transparent; }
-.view-controls { position: absolute; right: 12px; top: 12px; display: flex; flex-direction: column; gap: 6px; z-index: 2; }
-.view-controls button { border-radius: 10px; box-shadow: var(--shadow); }
-.presets { position: absolute; left: 12px; bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; z-index: 2; }
-.presets button { border-radius: 999px; box-shadow: var(--shadow); }
-.zoom-box { position: absolute; left: 12px; top: 12px; z-index: 2; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; box-shadow: var(--shadow); display: flex; gap: 6px; align-items: center; }
-.zoom-box label { font-size: .9rem; color: var(--muted); }
-.zoom-box input[type="range"] { width: 110px; }
-.edit-btn { position: absolute; bottom: 12px; right: 12px; z-index: 2; background: #22252b; color: #fff; border-color: #22252b; box-shadow: var(--shadow); }
-.detail-card { line-height: 1.5; }
-.detail-card .big { font-size: 1.4rem; font-weight: 800; margin: 0; }
-.footprint { width: 100%; height: 130px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); display: grid; place-items: center; margin: 10px 0; }
-.footprint svg { max-width: 90%; max-height: 110px; }
-form { display: grid; gap: 8px; margin-top: 12px; }
-form input { width: 100%; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--text); }
-.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* The 3D stage: the floor is the hero, controls float on top of it as glass. */
+.stage { position: relative; overflow: hidden; padding: 0; min-height: 560px; border-radius: 28px; }
+#scene { width: 100%; height: 100%; min-height: 560px; display: block; background: transparent; }
+/* One set of camera controls, not two. The bottom bar is the segmented control. */
+.presets {
+  position: absolute; left: 50%; transform: translateX(-50%); bottom: 16px;
+  display: flex; flex-wrap: wrap; gap: 4px; z-index: 2;
+  background: var(--panel);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--line); border-radius: 999px; padding: 6px;
+  box-shadow: var(--shadow-small), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+.presets button { border: 0; box-shadow: none; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 8px 14px; }
+.presets button:hover { background: var(--blue-soft); }
+.zoom-box {
+  position: absolute; left: 16px; top: 16px; z-index: 2;
+  background: var(--panel);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px;
+  box-shadow: var(--shadow-small), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  display: flex; gap: 8px; align-items: center;
+}
+.zoom-box button { padding: 6px 12px; box-shadow: none; }
+.zoom-box label { font-size: 0.9rem; color: var(--muted); white-space: nowrap; }
+.zoom-box input[type="range"] { width: 110px; accent-color: var(--blue); }
+.edit-btn { position: absolute; bottom: 16px; right: 16px; z-index: 2; background: #1d1d1f; color: #fff; border-color: transparent; }
+body[data-theme="dark"] .edit-btn { background: #f5f5f7; color: #1d1d1f; }
+
+.detail-card { line-height: 1.55; }
+.detail-card .big { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; margin: 0; }
+.footprint { width: 100%; height: 140px; border: 1px solid var(--line); border-radius: var(--radius-small); background: var(--panel-strong); display: grid; place-items: center; margin: 14px 0; }
+.footprint svg { max-width: 90%; max-height: 120px; }
+form { display: grid; gap: 10px; margin-top: 14px; }
+form label { font-weight: 600; font-size: 0.95rem; }
+form input { width: 100%; padding: 11px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel-strong); color: var(--text); margin-top: 4px; }
+.primary { background: var(--blue); color: #fff; border-color: transparent; font-weight: 700; }
 .toast { min-height: 1.4em; color: var(--muted); }
-footer { padding: 0 18px 18px; color: var(--muted); }
+footer { padding: 0 20px 20px; color: var(--muted); font-size: 0.9rem; }
+
 @media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
+  header { margin: 12px; }
+  .layout { grid-template-columns: 1fr; padding: 0 12px 12px; }
   .stage { order: -1; min-height: 62vh; }
   #scene { min-height: 62vh; }
-  .view-controls { flex-direction: row; flex-wrap: wrap; }
-  .presets { position: static; margin-top: 10px; }
+  .presets { left: 12px; right: 12px; transform: none; justify-content: center; }
+  .edit-btn { bottom: 76px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
 }
-body.a11y button, body.a11y .btn { padding: 11px 14px; }
+body.a11y button, body.a11y .btn { padding: 12px 16px; }
+body.a11y .panel, body.a11y header, body.a11y .presets, body.a11y .zoom-box { -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }

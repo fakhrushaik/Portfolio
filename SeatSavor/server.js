@@ -20,18 +20,18 @@ app.use(express.static(path.join(__dirname, "public")));
 // index.html directly from the file system (no server).
 // ---------------------------------------------------------------------------
 const TABLES = [
-  { id: "T1", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "free", zone: "Window", note: "Quiet window spot for two, good morning light.", x: -5.5, z: -3.5 },
-  { id: "T2", seats: 4, shape: "Rectangle", dimensions: "1.20 m × 0.80 m", status: "free", zone: "Window", note: "Window row, easy to watch the street.", x: -2.5, z: -3.5 },
-  { id: "T3", seats: 6, shape: "Rectangle", dimensions: "2.00 m × 1.00 m", status: "occupied", zone: "Window", note: "Large window table, currently in use.", x: 0.5, z: -3.5 },
-  { id: "T4", seats: 4, shape: "Square", dimensions: "1.00 m × 1.00 m", status: "free", zone: "Centre", note: "Central, easy to reach from the entrance.", x: 3.5, z: -3.5 },
-  { id: "T5", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "occupied", zone: "Centre", note: "Cosy centre table for two.", x: 6.0, z: -3.0 },
-  { id: "T6", seats: 4, shape: "Rectangle", dimensions: "1.40 m × 0.85 m", status: "free", zone: "Centre", note: "Near the plants, a little quieter.", x: -5.5, z: 0.0 },
-  { id: "T7", seats: 4, shape: "Rectangle", dimensions: "1.40 m × 0.85 m", status: "free", zone: "Centre", note: "Open centre table, good for groups of four.", x: -2.0, z: 0.0 },
-  { id: "T8", seats: 8, shape: "Rectangle", dimensions: "2.40 m × 1.00 m", status: "free", zone: "Centre", note: "Long table for celebrations and big groups.", x: 2.0, z: 0.0 },
-  { id: "T9", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "occupied", zone: "Bar", note: "Close to the bar, lively in the evening.", x: 6.0, z: 0.5 },
-  { id: "T10", seats: 4, shape: "Square", dimensions: "1.00 m × 1.00 m", status: "free", zone: "Garden", note: "Near the garden side, plants all around.", x: -5.5, z: 3.5 },
-  { id: "T11", seats: 6, shape: "Rectangle", dimensions: "2.00 m × 1.00 m", status: "occupied", zone: "Garden", note: "Garden-side table for six, currently in use.", x: -1.5, z: 3.5 },
-  { id: "T12", seats: 4, shape: "Rectangle", dimensions: "1.20 m × 0.80 m", status: "free", zone: "Bar", note: "Bar corner, easy to order and chat.", x: 3.5, z: 3.5 },
+  { id: "T1", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "free", zone: "Window", note: "Quiet window spot for two, good morning light.", x: -9, z: -5.5 },
+  { id: "T2", seats: 4, shape: "Rectangle", dimensions: "1.20 m × 0.80 m", status: "free", zone: "Window", note: "Window row, easy to watch the street.", x: -3, z: -5.5 },
+  { id: "T3", seats: 6, shape: "Rectangle", dimensions: "2.00 m × 1.00 m", status: "occupied", zone: "Window", note: "Large window table, currently in use.", x: 3, z: -5.5 },
+  { id: "T4", seats: 4, shape: "Square", dimensions: "1.00 m × 1.00 m", status: "free", zone: "Centre", note: "Central, easy to reach from the entrance.", x: 3, z: 5.5 },
+  { id: "T5", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "occupied", zone: "Centre", note: "Cosy centre table for two.", x: 9, z: -5.5 },
+  { id: "T6", seats: 4, shape: "Rectangle", dimensions: "1.40 m × 0.85 m", status: "free", zone: "Centre", note: "Near the plants, a little quieter.", x: -9, z: 0 },
+  { id: "T7", seats: 4, shape: "Rectangle", dimensions: "1.40 m × 0.85 m", status: "free", zone: "Centre", note: "Open centre table, good for groups of four.", x: -3, z: 0 },
+  { id: "T8", seats: 8, shape: "Rectangle", dimensions: "2.40 m × 1.00 m", status: "free", zone: "Centre", note: "Long table for celebrations and big groups.", x: 3, z: 0 },
+  { id: "T9", seats: 2, shape: "Round", dimensions: "0.90 m diameter", status: "occupied", zone: "Bar", note: "Close to the bar, lively in the evening.", x: 9, z: 0 },
+  { id: "T10", seats: 4, shape: "Square", dimensions: "1.00 m × 1.00 m", status: "free", zone: "Garden", note: "Near the garden side, plants all around.", x: -9, z: 5.5 },
+  { id: "T11", seats: 6, shape: "Rectangle", dimensions: "2.00 m × 1.00 m", status: "occupied", zone: "Garden", note: "Garden-side table for six, currently in use.", x: -3, z: 5.5 },
+  { id: "T12", seats: 4, shape: "Rectangle", dimensions: "1.20 m × 0.80 m", status: "free", zone: "Bar", note: "Bar corner, easy to order and chat.", x: 9, z: 5.5 },
 ];
 
 const bookings = [];
