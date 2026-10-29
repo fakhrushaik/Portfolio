@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — SeatSavor</title>
+<meta name="description" content="SeatSavor privacy: demo only, no tracking, no accounts, no payments.">
+<link rel="stylesheet" href="landing.css">
+</head>
+<body data-theme="light">
+<header class="site-header">
+  <a class="brand" href="index.html">SeatSavor</a>
+  <nav aria-label="SeatSavor">
+    <a href="floor.html">Demo</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html" aria-current="page">Privacy</a>
+    <a href="../../index.html">Portfolio</a>
+  </nav>
+  <button class="theme-btn" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+</header>
+
+<main class="wrap">
+  <p><a href="index.html">← Back to SeatSavor home</a></p>
+  <h1>Privacy — SeatSavor</h1>
+  <p style="color:var(--muted);">SeatSavor is a portfolio showcase demo. It is not a real restaurant booking system.</p>
+
+  <h2>What SeatSavor does not do</h2>
+  <ul>
+    <li><strong>No tracking.</strong> No analytics, no advertising trackers, no third-party tracking scripts.</li>
+    <li><strong>No advertising cookies.</strong> The app sets no cookies for advertising. Theme, accessibility, and zoom-speed preferences are stored only in your own browser's localStorage, on your device, not sent to a server, and can be cleared by clearing site data.</li>
+    <li><strong>No payments.</strong> There is no payment flow, no card data, and no checkout.</li>
+    <li><strong>No accounts.</strong> There is no sign-up, sign-in, password, or user profile.</li>
+    <li><strong>No sharing or selling.</strong> Demo bookings are never shared with, or sold to, anyone.</li>
+  </ul>
+
+  <h2>Demo bookings only</h2>
+  <p>When you run the local server, <code>POST /api/bookings</code> stores a demo record in server memory only. It contains only what you type in the demo form: table, date, time, party size, and an optional demo name. It is not a real reservation. No restaurant is notified. It disappears when the server restarts. On GitHub Pages there is no backend, so demo bookings are not saved there at all.</p>
+
+  <h2>How to delete or reset demo data</h2>
+  <ul>
+    <li>Click “Clear demo bookings” in the app, or</li>
+    <li>Use <code>POST /api/bookings/reset</code> on the local server, or</li>
+    <li>Restart the server, then run <code>npm start</code> again.</li>
+  </ul>
+
+  <h2>What is sent over the network</h2>
+  <p>The browser loads Three.js from a CDN (jsDelivr) so the 3D scene can render. That is the only external load in the frontend. API calls go only to the local Express server you run at http://localhost:3000. Do not enter real personal information, real phone numbers, real emails, or payment details into this demo.</p>
+
+  <p><a href="index.html">← Back to SeatSavor home</a> · <a href="about.html">About SeatSavor</a></p>
+</main>
+
+<script>
+(function () {
+  var btn = document.getElementById('themeBtn');
+  if (!btn) return;
+  function apply() { var dark = document.body.dataset.theme === 'dark'; btn.textContent = dark ? 'Light mode' : 'Dark mode'; btn.setAttribute('aria-pressed', String(dark)); }
+  try { if (localStorage.getItem('seatsavor-theme')) document.body.dataset.theme = localStorage.getItem('seatsavor-theme'); } catch (e) {}
+  apply();
+  btn.addEventListener('click', function () {
+    document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('seatsavor-theme', document.body.dataset.theme); } catch (e) {}
+    apply();
+  });
+})();
+</script>
+</body>
+</html>

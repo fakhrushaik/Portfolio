@@ -3,84 +3,122 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SeatSavor — 3D Restaurant Floor</title>
-<link rel="stylesheet" href="style.css">
-<script type="importmap">
-{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-} }
-</script>
+<title>SeatSavor — Pick your table in 3D</title>
+<meta name="description" content="SeatSavor: pick your table in 3D, like booking a seat on a plane. Demo only, no payments, no accounts.">
+<link rel="stylesheet" href="landing.css">
 </head>
 <body data-theme="light">
-<header>
-  <div>
-    <h1>SeatSavor</h1>
-    <p>Pick your table in 3D — like booking a seat on a plane. Demo only, no payments.</p>
-  </div>
-  <div class="toolbar">
-    <button id="themeBtn" type="button" aria-pressed="false">🌙 Dark mode</button>
-    <button id="a11yBtn" type="button" aria-pressed="false">♿ Accessibility mode</button>
-    <button id="rotateBtn" type="button" aria-pressed="false">⟳ Auto-rotate</button>
-    <a class="btn" href="portfolio.html">Portfolio →</a>
-  </div>
+<header class="site-header">
+  <a class="brand" href="index.html">SeatSavor</a>
+  <nav aria-label="SeatSavor">
+    <a href="floor.html">Demo</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="../../index.html">Portfolio</a>
+  </nav>
+  <button class="theme-btn" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
 </header>
 
-<main class="layout">
-  <aside class="panel" aria-label="Restaurant controls">
-    <div class="open-row"><strong>Restaurant</strong><span><span class="badge" style="color:var(--green)">● OPEN</span> <button id="openBtn" class="switch" type="button" aria-label="Toggle open or closed"></button></span></div>
-    <p class="muted" style="margin-top:0">Owner view in the demo: Tables, Menus, Bookings, Settings.</p>
-    <p>
-      <button data-filter="all" class="filter active" type="button">All</button>
-      <button data-filter="free" class="filter" type="button">Free</button>
-      <button data-filter="occupied" class="filter" type="button">Occupied</button>
+<main>
+  <section class="hero">
+    <p class="eyebrow">3D restaurant booking · Demo</p>
+    <h1>Pick your table like a seat on a plane.</h1>
+    <p class="lead">See the whole room, choose the exact table you want, and watch it in 3D. No accounts, no payments, just the demo.</p>
+    <p class="cta-row">
+      <a class="btn-primary" href="floor.html">Try our Demo →</a>
+      <a class="btn-secondary" href="about.html">About SeatSavor</a>
     </p>
-    <h2>Pick a table</h2>
-    <p class="muted">Use Tab, then arrow keys to move between tables, Enter to select. Or click a table in 3D.</p>
-    <div id="tableList" class="table-list" role="listbox" aria-label="Tables"></div>
-    <p class="muted">Blue = free &nbsp;•&nbsp; Coral = occupied &nbsp;•&nbsp; Solid = selected</p>
-  </aside>
-
-  <section class="panel stage" aria-label="3D restaurant floor">
-    <div class="zoom-box">
-      <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
-      <label for="zoomSpeed">Zoom speed <span id="zoomSpeedVal">0.35</span></label>
-      <input id="zoomSpeed" type="range" min="0.1" max="1" step="0.05" value="0.35">
-      <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
-    </div>
-    <canvas id="scene" tabindex="0" aria-label="3D restaurant floor. Use arrow keys to cycle tables after selecting one."></canvas>
-    <div class="presets">
-      <button type="button" data-preset="poster">Poster</button>
-      <button type="button" data-preset="top">Top down</button>
-      <button type="button" data-preset="window">Window side</button>
-      <button type="button" data-preset="bar">Bar corner</button>
-    </div>
-    <button id="editBtn" class="edit-btn" type="button">✎ Edit Layout</button>
+    <p class="small">Hover over a tile below for more detail. On touch, the detail is shown below the title.</p>
   </section>
 
-  <aside class="panel detail-card" aria-label="Selected table details">
-    <div id="detail" aria-live="polite">
-      <p class="big">Pick a table</p>
-      <p class="muted">Click a table in the 3D room, or choose one from the list on the left.</p>
+  <section class="bento" aria-label="SeatSavor highlights">
+    <a class="tile tile-tables" href="floor.html">
+      <div><p class="kicker">Tables</p><h2>12 tables</h2><p>Window · Centre · Garden · Bar</p></div>
+      <p class="tile-detail">Free tables are blue, occupied tables are coral. Click a table in 3D, or pick it from the list, to see its seats, shape, size, and note.</p>
+    </a>
+
+    <a class="tile tile-main" href="floor.html" aria-label="Try our Demo: open the 3D restaurant floor">
+      <div class="main-scene" aria-hidden="true">
+        <span class="loop-badge">Animated preview · loops</span>
+        <div class="iso">
+          <div class="iso-table free"></div><div class="iso-table free"></div><div class="iso-table occupied"></div>
+          <div class="iso-table free"></div><div class="iso-table free"></div><div class="iso-table occupied"></div>
+        </div>
+        <div class="main-overlay"><span>Try our Demo →</span></div>
+      </div>
+      <div class="main-copy">
+        <h2>SeatSavor in 3D</h2>
+        <p>Drag to orbit, scroll to zoom, and pick T1 to T12 in a room with real space between tables.</p>
+      </div>
+    </a>
+
+    <a class="tile tile-camera" href="floor.html">
+      <div><p class="kicker">Camera</p><h2>Camera presets</h2><p>Poster · Top down · Window · Bar</p></div>
+      <p class="tile-detail">One tap moves the camera to the poster view, a top-down plan, the window side, or the bar corner. Zoom is gentle, with + and − buttons and a zoom-speed slider.</p>
+    </a>
+
+    <a class="tile tile-access" href="floor.html">
+      <div><p class="kicker">Accessibility</p><h2>Built to be usable</h2><p>Keyboard · Large text · High contrast</p></div>
+      <p class="tile-detail">Turn on Accessibility mode in the demo for larger text, high contrast, and reduced motion. Tables can be picked with Tab, arrow keys, and Enter, and focus is always visible.</p>
+    </a>
+
+    <a class="tile tile-dark" href="floor.html">
+      <div><p class="kicker">Appearance</p><h2>Light &amp; Dark</h2><p>Glass adapts to your theme</p></div>
+      <p class="tile-detail">The Liquid Glass panels adapt to light and dark mode. Your choice is saved in your own browser only, and the demo starts from your system setting.</p>
+    </a>
+
+    <a class="tile tile-privacy" href="privacy.html">
+      <div><p class="kicker">Privacy</p><h2>Privacy first</h2><p>No tracking · No accounts</p></div>
+      <p class="tile-detail">No tracking, no advertising cookies, no payments, and no accounts. Theme and zoom choices stay in your own browser. This is a demo, not a real reservation system.</p>
+    </a>
+
+    <a class="tile tile-booking" href="floor.html">
+      <div><p class="kicker">Booking</p><h2>Demo booking</h2><p>In the 3D demo</p></div>
+      <p class="tile-detail">Pick a table, then try the demo booking form in the 3D view. On GitHub Pages there is no backend, so bookings need the local server. See About for the full note.</p>
+    </a>
+
+    <a class="tile tile-about" href="about.html">
+      <div><p class="kicker">Project</p><h2>About SeatSavor</h2><p>Showcase-first, built with Three.js</p></div>
+      <p class="tile-detail">A showcase-first portfolio project: a 12-table isometric room, detail cards, camera presets, and a Node.js demo backend for local use only.</p>
+    </a>
+  </section>
+
+  <section class="soon-strip" aria-labelledby="soon-heading">
+    <h2 id="soon-heading">Coming soon</h2>
+    <p class="small" style="text-align:center;">These options are not available right now. They are shown honestly, not as fake buttons.</p>
+    <div class="soon-grid">
+      <div class="soon-card"><strong>Menus</strong><p><span class="coming-soon">Coming soon</span></p></div>
+      <div class="soon-card"><strong>Bookings list</strong><p><span class="coming-soon">Coming soon</span></p></div>
+      <div class="soon-card"><strong>Settings</strong><p><span class="coming-soon">Coming soon</span></p></div>
+      <div class="soon-card"><strong>Edit Layout</strong><p><span class="coming-soon">Coming soon</span></p></div>
     </div>
-    <div id="footprint" class="footprint" aria-hidden="true"></div>
-    <form id="bookingForm">
-      <h2 style="margin-bottom:2px">Demo booking (in-memory only)</h2>
-      <label>Date <input id="bkDate" type="date" required></label>
-      <label>Time <input id="bkTime" type="time" required></label>
-      <label>Party size <input id="bkParty" type="number" min="1" max="12" value="2" required></label>
-      <label>Name (optional, demo only) <input id="bkName" type="text" placeholder="Demo guest"></label>
-      <button class="primary" type="submit">Book selected table</button>
-      <p id="bookingMsg" class="toast" aria-live="polite"></p>
-      <button id="resetBookings" type="button">Clear demo bookings</button>
-    </form>
-  </aside>
+  </section>
 </main>
 
-<footer>
-  <p>Demo only — no tracking, no advertising cookies, no payments, no accounts. Bookings live in server memory and vanish on restart. See <a href="../PRIVACY.md">PRIVACY.md</a> in the project (linked in the README too).</p>
+<footer class="site-footer">
+  <p>Demo only — no tracking, no advertising cookies, no payments, no accounts. <a href="privacy.html">Privacy</a> · <a href="about.html">About</a> · <a href="../../index.html">Portfolio</a></p>
 </footer>
 
-<script type="module" src="app.js"></script>
+<script>
+(function () {
+  var btn = document.getElementById('themeBtn');
+  if (!btn) return;
+  function apply() {
+    var dark = document.body.dataset.theme === 'dark';
+    btn.textContent = dark ? 'Light mode' : 'Dark mode';
+    btn.setAttribute('aria-pressed', String(dark));
+  }
+  try { if (localStorage.getItem('seatsavor-theme')) document.body.dataset.theme = localStorage.getItem('seatsavor-theme'); } catch (e) {}
+  if (!document.body.dataset.theme || document.body.dataset.theme === 'light') {
+    try { if (!localStorage.getItem('seatsavor-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.dataset.theme = 'dark'; } catch (e) {}
+  }
+  apply();
+  btn.addEventListener('click', function () {
+    document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('seatsavor-theme', document.body.dataset.theme); } catch (e) {}
+    apply();
+  });
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About SeatSavor</title>
+<meta name="description" content="About SeatSavor: a showcase-first 3D restaurant table-booking demo.">
+<link rel="stylesheet" href="landing.css">
+</head>
+<body data-theme="light">
+<header class="site-header">
+  <a class="brand" href="index.html">SeatSavor</a>
+  <nav aria-label="SeatSavor">
+    <a href="floor.html">Demo</a>
+    <a href="about.html" aria-current="page">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="../../index.html">Portfolio</a>
+  </nav>
+  <button class="theme-btn" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+</header>
+
+<main class="wrap">
+  <p><a href="index.html">← Back to SeatSavor home</a></p>
+  <h1>About SeatSavor</h1>
+  <p class="lead" style="color:var(--muted); font-size:1.2rem;">Pick your table in 3D, like booking a seat on a plane.</p>
+  <p><a class="btn-primary" href="floor.html">Try our Demo →</a></p>
+
+  <h2>What it is</h2>
+  <p>A showcase-first 3D restaurant table-booking demo. A pastel isometric room with 12 clickable tables, detail cards for each table, and camera presets for the poster view, top down, window side, and bar corner. The room was widened in the latest version so tables have real space between them: 6 metres between columns and 5.5 metres between rows, on a 26 by 18 floor.</p>
+
+  <h2>What you can do in the demo</h2>
+  <ul>
+    <li>Click a table in 3D, or pick it from the list, to open its detail card: seats, shape, dimensions, zone, and location note, plus a 2D top-down footprint</li>
+    <li>Use camera presets, drag to orbit, scroll or pinch to zoom, and use the + and − buttons and zoom-speed slider for gentle zoom</li>
+    <li>Filter tables by All, Free, or Occupied</li>
+    <li>Switch light and dark mode, and turn on Accessibility mode for larger text, high contrast, reduced motion, visible focus, and keyboard navigation</li>
+    <li>Try the demo booking form in the 3D view</li>
+  </ul>
+
+  <h2>How it is built</h2>
+  <p>JavaScript, Three.js, HTML, and CSS with a Liquid Glass interface. The full project also has a Node.js and Express demo backend for local use: tables and in-memory demo bookings only, with no payments and no accounts. Run it locally with <code>npm install</code> then <code>npm start</code> in the SeatSavor folder, then open http://localhost:3000</p>
+
+  <h2>What does not work on GitHub Pages, and why</h2>
+  <p>GitHub Pages hosts static sites only. It does not run the Node.js server, so on Pages the 3D picking, camera presets, and table details work from built-in demo data, but demo bookings will say the backend is not reachable. That is expected. To use bookings, run the server locally as above.</p>
+
+  <h2>Coming soon</h2>
+  <p>Menus, a bookings list, Settings, and Edit Layout are marked Coming soon in the demo. They are not fake buttons.</p>
+
+  <h2>Privacy</h2>
+  <p>Demo only. Fictional data, no tracking, no advertising cookies, no accounts, no payments. See the full <a href="privacy.html">Privacy page</a>.</p>
+
+  <p><a href="index.html">← Back to SeatSavor home</a> · <a href="../../index.html">Portfolio homepage</a></p>
+</main>
+
+<script>
+(function () {
+  var btn = document.getElementById('themeBtn');
+  if (!btn) return;
+  function apply() { var dark = document.body.dataset.theme === 'dark'; btn.textContent = dark ? 'Light mode' : 'Dark mode'; btn.setAttribute('aria-pressed', String(dark)); }
+  try { if (localStorage.getItem('seatsavor-theme')) document.body.dataset.theme = localStorage.getItem('seatsavor-theme'); } catch (e) {}
+  apply();
+  btn.addEventListener('click', function () {
+    document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('seatsavor-theme', document.body.dataset.theme); } catch (e) {}
+    apply();
+  });
+})();
+</script>
+</body>
+</html>
